@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مسار تعلم C++ الكامل</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #0e0e0e;
+  --surface: #161616;
+  --surface2: #1e1e1e;
+  --border: #2a2a2a;
+  --text: #e8e8e8;
+  --muted: #666;
+  --p1: #f97316;
+  --p2: #22c55e;
+  --p3: #3b82f6;
+  --p4: #a855f7;
+  --p5: #ec4899;
+  --done: #22c55e;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* HEADER */
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.logo {
+  display: flex; align-items: center; gap: 12px;
+}
+.logo-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 600;
+  background: var(--p1);
+  color: #000;
+  padding: 4px 12px;
+  border-radius: 4px;
+  letter-spacing: -.02em;
+}
+.logo-text { font-size: 15px; font-weight: 700; color: var(--text); }
+.logo-sub { font-size: 12px; color: var(--muted); }
+.progress-wrap {
+  display: flex; align-items: center; gap: 12px;
+}
+.progress-label { font-size: 12px; color: var(--muted); }
+.progress-track {
+  width: 160px; height: 4px;
+  background: var(--border); border-radius: 99px;
+}
+.progress-fill {
+  height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, var(--p1), var(--p2));
+  transition: width .4s ease;
+}
+.progress-pct { font-size: 12px; font-weight: 700; color: var(--p2); min-width: 32px; }
+
+/* HERO */
+.hero {
+  max-width: 860px; margin: 0 auto;
+  padding: 60px 40px 40px;
+  text-align: center;
+}
+.hero-title {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 900; line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -.02em;
+}
+.hero-title span { color: var(--p1); }
+.hero-sub {
+  font-size: 17px; color: var(--muted);
+  max-width: 560px; margin: 0 auto 32px;
+  font-weight: 300;
+}
+.hero-chips {
+  display: flex; gap: 8px; justify-content: center;
+  flex-wrap: wrap;
+}
+.chip {
+  font-size: 12px; font-weight: 700;
+  padding: 6px 14px; border-radius: 100px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  display: flex; align-items: center; gap: 5px;
+}
+
+/* DIVIDER */
+.divider {
+  max-width: 860px; margin: 32px auto;
+  height: 1px; background: var(--border);
+}
+
+/* HOW TO USE */
+.how-to {
+  max-width: 860px; margin: 0 auto;
+  padding: 0 40px 48px;
+}
+.how-title {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.how-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.how-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+}
+.how-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 18px;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.how-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px; font-weight: 600;
+  opacity: .2; flex-shrink: 0; line-height: 1; margin-top: 2px;
+}
+.how-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.how-text strong { color: var(--text); font-weight: 700; }
+
+/* PHASE SECTIONS */
+.roadmap {
+  max-width: 860px; margin: 0 auto;
+  padding: 0 40px 80px;
+}
+
+.phase-section { margin-bottom: 48px; }
+
+.phase-label {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 20px;
+}
+.phase-dot {
+  width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+}
+.phase-name {
+  font-size: 12px; font-weight: 800; letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.phase-badge {
+  font-size: 11px; padding: 3px 10px; border-radius: 100px;
+  font-weight: 700; border: 1px solid; margin-right: 4px;
+}
+.phase-line { flex: 1; height: 1px; background: var(--border); }
+.phase-duration { font-size: 11px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+/* STEP CARDS */
+.steps { display: flex; flex-direction: column; gap: 8px; }
+
+.step {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.step:hover { border-color: #3a3a3a; }
+.step.completed { opacity: .55; }
+.step.completed .step-title { text-decoration: line-through; color: var(--muted); }
+
+.step-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px; cursor: pointer;
+}
+.step-check {
+  width: 20px; height: 20px; border-radius: 5px;
+  border: 1.5px solid var(--border); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s; cursor: pointer;
+  font-size: 11px; font-weight: 700;
+}
+.step.completed .step-check {
+  background: var(--done); border-color: var(--done); color: #000;
+}
+.step-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted);
+  flex-shrink: 0; width: 24px;
+}
+.step-title { font-size: 15px; font-weight: 700; flex: 1; }
+.step-tags { display: flex; gap: 5px; }
+.step-tag {
+  font-size: 10px; padding: 2px 8px; border-radius: 4px;
+  font-weight: 700; font-family: 'JetBrains Mono', monospace;
+}
+.step-expand { color: var(--muted); font-size: 12px; transition: transform .25s; flex-shrink: 0; }
+.step.open .step-expand { transform: rotate(180deg); }
+
+.step-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height .35s ease;
+}
+.step.open .step-body { max-height: 1000px; }
+
+.step-inner {
+  padding: 0 18px 18px 18px;
+  border-top: 1px solid var(--border);
+}
+
+.step-desc {
+  font-size: 14px; color: #aaa; line-height: 1.8;
+  margin: 14px 0 16px;
+}
+.step-desc strong { color: var(--text); }
+
+.subtopics {
+  display: flex; flex-direction: column; gap: 5px;
+  margin-bottom: 16px;
+}
+.subtopic {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: #bbb; line-height: 1.6;
+  padding: 6px 10px;
+  background: var(--surface2); border-radius: 6px;
+  cursor: pointer; transition: all .15s;
+}
+.subtopic:hover { background: #252525; color: var(--text); }
+.subtopic.checked { color: var(--done); }
+.subtopic.checked span { text-decoration: line-through; color: var(--muted); }
+.sub-check {
+  width: 14px; height: 14px; border-radius: 3px;
+  border: 1.5px solid var(--border); flex-shrink: 0; margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; transition: all .2s;
+}
+.subtopic.checked .sub-check {
+  background: var(--done); border-color: var(--done); color: #000;
+}
+
+.resources-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+}
+.resources { display: flex; flex-wrap: wrap; gap: 6px; }
+.resource {
+  font-size: 12px; padding: 4px 12px; border-radius: 5px;
+  background: var(--surface2); border: 1px solid var(--border);
+  color: #aaa; display: flex; align-items: center; gap: 5px;
+  transition: all .2s;
+}
+.resource:hover { border-color: #444; color: var(--text); }
+.resource .r-type {
+  font-size: 9px; font-weight: 700; padding: 1px 5px;
+  border-radius: 3px; margin-left: 2px;
+}
+
+.mentor-note {
+  margin-top: 14px; padding: 12px 14px;
+  border-radius: 8px; border-right: 3px solid;
+  font-size: 13px; line-height: 1.7; color: #aaa;
+}
+.mentor-note strong { font-weight: 700; }
+
+/* TIPS BOX */
+.tips-section {
+  max-width: 860px; margin: 0 auto;
+  padding: 0 40px 80px;
+}
+.tips-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-top: 16px; }
+.tip-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 18px 20px;
+  display: flex; gap: 12px;
+}
+.tip-icon { font-size: 20px; flex-shrink: 0; }
+.tip-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.tip-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* MISTAKES */
+.mistakes-section {
+  max-width: 860px; margin: 0 auto;
+  padding: 0 40px 80px;
+}
+.mistakes-list { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+.mistake {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 20px;
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.m-x { font-size: 14px; flex-shrink: 0; opacity: .6; margin-top: 2px; }
+.m-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.m-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.m-fix { font-size: 12px; font-weight: 700; color: var(--done); margin-top: 6px; display: flex; align-items: center; gap: 5px; }
+
+/* SECTION TITLE STYLE */
+.sec-title {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.sec-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* FOOTER */
+footer {
+  text-align: center; padding: 40px;
+  border-top: 1px solid var(--border);
+  color: var(--muted); font-size: 13px;
+}
+
+/* MOBILE */
+@media(max-width:700px) {
+  header { padding: 16px 20px; flex-wrap: wrap; gap: 12px; }
+  .hero, .how-to, .roadmap, .tips-section, .mistakes-section { padding-right: 20px; padding-left: 20px; }
+  .how-grid { grid-template-columns: 1fr; }
+  .tips-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-badge">C++</div>
+    <div>
+      <div class="logo-text">مسار تعلم C++ الكامل</div>
+      <div class="logo-sub">مرجع شخصي — تتبع تقدمك خطوة بخطوة</div>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label">تقدمك</div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+    <div class="progress-pct" id="prog-pct">0%</div>
+  </div>
+</header>
+
+<section class="hero">
+  <h1 class="hero-title">مسارك الكامل لتعلم<br><span>C++</span> من الصفر</h1>
+  <p class="hero-sub">دليل مرجعي يأخذك خطوة بخطوة — اقرأ كل موضوع، تعلّمه، ثم ضع عليه ✓ وانتقل للتالي</p>
+  <div class="hero-chips">
+    <div class="chip">🗓 4–5 أشهر</div>
+    <div class="chip">📚 5 مراحل</div>
+    <div class="chip">🎯 خطوة بخطوة</div>
+    <div class="chip">⚡ للمبتدئ الكامل</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="how-to">
+  <div class="how-title">كيف تستخدم هذا المرجع</div>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-num">١</div>
+      <div class="how-text"><strong>اقرأ الموضوع</strong> — افتح الخطوة واقرأ الشرح والمواضيع الفرعية الداخلية</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">٢</div>
+      <div class="how-text"><strong>تعلّمه من مصدر</strong> — استخدم أي مصدر تفضله: يوتيوب، كتاب، كورس</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">٣</div>
+      <div class="how-text"><strong>ضع ✓ وانتقل</strong> — بعد ما تتقن الموضوع، علّم عليه وانتقل للخطوة التالية</div>
+    </div>
+  </div>
+</section>
+
+<section class="roadmap" id="roadmap">
+
+  <!-- PHASE 1 -->
+  <div class="phase-section">
+    <div class="phase-label">
+      <div class="phase-dot" style="background:var(--p1)"></div>
+      <div class="phase-name" style="color:var(--p1)">المرحلة الأولى</div>
+      <span class="phase-badge" style="color:var(--p1);border-color:rgba(249,115,22,.25);background:rgba(249,115,22,.07)">الأساس</span>
+      <div class="phase-line"></div>
+      <div class="phase-duration">3–4 أسابيع</div>
+    </div>
+    <div class="steps" id="steps-p1">
+
+      <div class="step" id="s1">
+        <div class="step-header" onclick="toggleStep('s1')">
+          <div class="step-check" onclick="toggleCheck(event,'s1')"></div>
+          <div class="step-num">01</div>
+          <div class="step-title">ما هي البرمجة؟ وكيف يعمل الكمبيوتر؟</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(249,115,22,.1);color:var(--p1)">أساس</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">قبل ما تكتب كود واحد، لازم تفهم <strong>كيف يفكر الكمبيوتر</strong>. الكمبيوتر يفهم الأصفار والواحدات فقط — البرمجة هي طريقتنا لإعطائه تعليمات بلغة أقرب للإنسان.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>تعريف البرمجة بمثال من الحياة</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>كيف يتحول الكود لأوامر يفهمها الكمبيوتر</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>الفرق بين الكود والمترجم والبرنامج النهائي</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>لماذا C++ تحديداً؟</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>CS50 مقدمة البرمجة</span>
+            <span class="resource"><span class="r-type" style="background:rgba(249,115,22,.15);color:var(--p1)">مقال</span>learncpp.com الفصل 0</span>
+          </div>
+          <div class="mentor-note" style="border-color:var(--p1);background:rgba(249,115,22,.04)">
+            <strong style="color:var(--p1)">💡 ملاحظة:</strong> لا تتعجل هذه الخطوة. الفهم هنا يوفر عليك أشهراً من الارتباك لاحقاً.
+          </div>
+        </div></div>
+      </div>
+
+      <div class="step" id="s2">
+        <div class="step-header" onclick="toggleStep('s2')">
+          <div class="step-check" onclick="toggleCheck(event,'s2')"></div>
+          <div class="step-num">02</div>
+          <div class="step-title">المترجم وبيئة العمل — إعداد الكمبيوتر</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(249,115,22,.1);color:var(--p1)">أساس</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">تحتاج بيئة عمل لتشغيل كودك. <strong>VS Code</strong> هو الخيار الأفضل للمبتدئين — مجاني وسريع.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>تحميل وتثبيت VS Code</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>تثبيت مترجم C++ (MinGW لـ Windows / g++ لـ Linux/Mac)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>كتابة وتشغيل أول برنامج "مرحباً بالعالم"</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>فهم رسائل الأخطاء (Errors)</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>إعداد VS Code لـ C++</span>
+            <span class="resource"><span class="r-type" style="background:rgba(59,130,246,.15);color:var(--p3)">موقع</span>code.visualstudio.com</span>
+          </div>
+          <div class="mentor-note" style="border-color:var(--p1);background:rgba(249,115,22,.04)">
+            <strong style="color:var(--p1)">⚠️ مهم:</strong> لا تكمّل للخطوة الثالثة حتى تشغّل "Hello World" بنفسك بنجاح.
+          </div>
+        </div></div>
+      </div>
+
+      <div class="step" id="s3">
+        <div class="step-header" onclick="toggleStep('s3')">
+          <div class="step-check" onclick="toggleCheck(event,'s3')"></div>
+          <div class="step-num">03</div>
+          <div class="step-title">أنواع البيانات والمتغيرات</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(249,115,22,.1);color:var(--p1)">أساس</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">المتغير هو <strong>صندوق في الذاكرة</strong> له اسم وقيمة. النوع يحدد شكل الصندوق وحجمه. هذا أساس كل برمجة.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>int — الأعداد الصحيحة (1، 2، 100)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>float / double — الأعداد العشرية (3.14، 9.8)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>char — الحرف الواحد ('A', 'z')</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>string — النص الكامل</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>bool — صح أو غلط (true / false)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>const — الثابت الذي لا يتغير</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>قواعد تسمية المتغيرات</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(249,115,22,.15);color:var(--p1)">مقال</span>learncpp.com — Chapter 1</span>
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>أنواع البيانات C++</span>
+          </div>
+          <div class="mentor-note" style="border-color:var(--p1);background:rgba(249,115,22,.04)">
+            <strong style="color:var(--p1)">💡 تمرين:</strong> عرّف متغيرات تمثل بياناتك الشخصية: اسمك، عمرك، معدلك. اطبعها على الشاشة.
+          </div>
+        </div></div>
+      </div>
+
+      <div class="step" id="s4">
+        <div class="step-header" onclick="toggleStep('s4')">
+          <div class="step-check" onclick="toggleCheck(event,'s4')"></div>
+          <div class="step-num">04</div>
+          <div class="step-title">العمليات — الحسابية والمنطقية والمقارنة</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(249,115,22,.1);color:var(--p1)">أساس</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">العمليات هي التي تجعل البرنامج <strong>يحسب ويقارن ويقرر</strong>. بدونها البرنامج مجرد بيانات ساكنة.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>الحسابية: + - * / % (الباقي من القسمة)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>المقارنة: == != &gt; &lt; &gt;= &lt;=</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>المنطقية: && (و) || (أو) ! (ليس)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>الإسناد: = += -= *= /=</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>الزيادة والنقصان: ++ --</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>أولويات العمليات (مثل الرياضيات)</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(249,115,22,.15);color:var(--p1)">مقال</span>learncpp.com — Chapter 2</span>
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-section">
+    <div class="phase-label">
+      <div class="phase-dot" style="background:var(--p2)"></div>
+      <div class="phase-name" style="color:var(--p2)">المرحلة الثانية</div>
+      <span class="phase-badge" style="color:var(--p2);border-color:rgba(34,197,94,.25);background:rgba(34,197,94,.07)">التحكم في البرنامج</span>
+      <div class="phase-line"></div>
+      <div class="phase-duration">3–4 أسابيع</div>
+    </div>
+    <div class="steps">
+
+      <div class="step" id="s5">
+        <div class="step-header" onclick="toggleStep('s5')">
+          <div class="step-check" onclick="toggleCheck(event,'s5')"></div>
+          <div class="step-num">05</div>
+          <div class="step-title">الجمل الشرطية — if / else / switch</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(34,197,94,.1);color:var(--p2)">تحكم</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">البرنامج يصير <strong>"ذكياً"</strong> — يقدر يتخذ قرارات بناءً على شروط. if/else هو أول خطوة لبناء منطق حقيقي.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>جملة if الأساسية</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>if / else</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>if / else if / else (شروط متعددة)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>switch — للحالات المحددة</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>العامل الثلاثي ؟ :</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>شرح if else بالعربي</span>
+            <span class="resource"><span class="r-type" style="background:rgba(249,115,22,.15);color:var(--p1)">مقال</span>learncpp.com — Chapter 7</span>
+          </div>
+          <div class="mentor-note" style="border-color:var(--p2);background:rgba(34,197,94,.04)">
+            <strong style="color:var(--p2)">💡 تمرين:</strong> اكتب برنامج يسأل عن الدرجة (0-100) ويطبع: ممتاز / جيد / مقبول / راسب.
+          </div>
+        </div></div>
+      </div>
+
+      <div class="step" id="s6">
+        <div class="step-header" onclick="toggleStep('s6')">
+          <div class="step-check" onclick="toggleCheck(event,'s6')"></div>
+          <div class="step-num">06</div>
+          <div class="step-title">الحلقات — for / while / do-while</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(34,197,94,.1);color:var(--p2)">تحكم</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">الحلقات تجعل الكمبيوتر يكرر عملية <strong>بدون ما تكتبها مئة مرة</strong>. هذا أساس أتمتة أي مهمة.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>حلقة for — عدد معروف من التكرارات</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>حلقة while — تكرار طالما الشرط صحيح</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>حلقة do-while — تنفذ مرة على الأقل</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>break — للخروج من الحلقة</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>continue — لتخطي تكرار</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>الحلقات المتداخلة (Nested Loops)</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>الحلقات في C++</span>
+            <span class="resource"><span class="r-type" style="background:rgba(249,115,22,.15);color:var(--p1)">مقال</span>learncpp.com — Chapter 8</span>
+          </div>
+          <div class="mentor-note" style="border-color:var(--p2);background:rgba(34,197,94,.04)">
+            <strong style="color:var(--p2)">💡 تمرين:</strong> اكتب برنامج يطبع جدول ضرب من 1 إلى 10 باستخدام حلقتين متداخلتين.
+          </div>
+        </div></div>
+      </div>
+
+      <div class="step" id="s7">
+        <div class="step-header" onclick="toggleStep('s7')">
+          <div class="step-check" onclick="toggleCheck(event,'s7')"></div>
+          <div class="step-num">07</div>
+          <div class="step-title">المصفوفات — Arrays</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(34,197,94,.1);color:var(--p2)">بيانات</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">المصفوفة تخزن <strong>مجموعة من القيم من نفس النوع</strong> في مكان واحد. بدلاً من 100 متغير، مصفوفة واحدة.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>تعريف المصفوفة وأهميتها</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>الوصول للعناصر بالفهرس (Index يبدأ من 0)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>التكرار على المصفوفة بالحلقات</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>المصفوفة ثنائية الأبعاد (جدول)</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>المصفوفات C++</span>
+            <span class="resource"><span class="r-type" style="background:rgba(249,115,22,.15);color:var(--p1)">مقال</span>learncpp.com — Chapter 17</span>
+          </div>
+          <div class="mentor-note" style="border-color:var(--p2);background:rgba(34,197,94,.04)">
+            <strong style="color:var(--p2)">💡 تمرين:</strong> اكتب برنامج يأخذ 5 درجات ويحسب المعدل والأعلى والأدنى.
+          </div>
+        </div></div>
+      </div>
+
+      <div class="step" id="s8">
+        <div class="step-header" onclick="toggleStep('s8')">
+          <div class="step-check" onclick="toggleCheck(event,'s8')"></div>
+          <div class="step-num">08</div>
+          <div class="step-title">الدوال — Functions</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(34,197,94,.1);color:var(--p2)">تنظيم</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">الدوال تقطع الكود لـ <strong>قطع صغيرة قابلة لإعادة الاستخدام</strong>. كود بدون دوال = فوضى لا تُحتمل.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>تعريف الدالة واستدعاؤها</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>المعاملات (Parameters) والوسائط (Arguments)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>قيمة الإرجاع (Return Value)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>التمرير بالقيمة vs التمرير بالمرجع</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>نطاق المتغيرات (Scope)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>Overloading — نفس الاسم لدوال مختلفة</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>الدوال في C++</span>
+            <span class="resource"><span class="r-type" style="background:rgba(249,115,22,.15);color:var(--p1)">مقال</span>learncpp.com — Chapter 2</span>
+          </div>
+          <div class="mentor-note" style="border-color:var(--p2);background:rgba(34,197,94,.04)">
+            <strong style="color:var(--p2)">🎯 مشروع المرحلة:</strong> اكتب آلة حاسبة تستقبل عمليتين ورقمين وتعيد النتيجة — باستخدام دوال منفصلة لكل عملية.
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-section">
+    <div class="phase-label">
+      <div class="phase-dot" style="background:var(--p3)"></div>
+      <div class="phase-name" style="color:var(--p3)">المرحلة الثالثة</div>
+      <span class="phase-badge" style="color:var(--p3);border-color:rgba(59,130,246,.25);background:rgba(59,130,246,.07)">العمق</span>
+      <div class="phase-line"></div>
+      <div class="phase-duration">4–5 أسابيع</div>
+    </div>
+    <div class="steps">
+
+      <div class="step" id="s9">
+        <div class="step-header" onclick="toggleStep('s9')">
+          <div class="step-check" onclick="toggleCheck(event,'s9')"></div>
+          <div class="step-num">09</div>
+          <div class="step-title">المؤشرات — Pointers</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(59,130,246,.1);color:var(--p3)">متوسط</span>
+            <span class="step-tag" style="background:rgba(239,68,68,.1);color:#f87171">صعب</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">أصعب موضوع في C++ — وأهمه. المؤشر يخزن <strong>عنوان خلية في الذاكرة</strong> بدل قيمة مباشرة. فهمه يفتح لك C++ كاملاً.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>مفهوم عنوان الذاكرة & (Address)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>تعريف المؤشر * وكيف يعمل</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>فك الإشارة (Dereferencing)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>المؤشرات مع المصفوفات</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>المؤشرات مع الدوال</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>مؤشر null والتحقق منه</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>المؤشرات شرح مبسط</span>
+            <span class="resource"><span class="r-type" style="background:rgba(249,115,22,.15);color:var(--p1)">مقال</span>learncpp.com — Chapter 12</span>
+          </div>
+          <div class="mentor-note" style="border-color:var(--p3);background:rgba(59,130,246,.04)">
+            <strong style="color:var(--p3)">⚠️ تحذير:</strong> خصص أسبوعاً كاملاً لهذا الموضوع فقط. لا تتجاوزه حتى تفهمه 100% — كل ما بعده يعتمد عليه.
+          </div>
+        </div></div>
+      </div>
+
+      <div class="step" id="s10">
+        <div class="step-header" onclick="toggleStep('s10')">
+          <div class="step-check" onclick="toggleCheck(event,'s10')"></div>
+          <div class="step-num">10</div>
+          <div class="step-title">إدارة الذاكرة الديناميكية — new & delete</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(59,130,246,.1);color:var(--p3)">متوسط</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">تحجز ذاكرة <strong>وقت التشغيل</strong> حسب الحاجة — مش وقت كتابة الكود. هذا ما يجعل البرامج مرنة وحقيقية.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>الفرق بين Stack و Heap</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>حجز ذاكرة بـ new</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>تحرير الذاكرة بـ delete</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>Memory Leak وكيف تتجنبه</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>Dynamic Memory C++</span>
+            <span class="resource"><span class="r-type" style="background:rgba(249,115,22,.15);color:var(--p1)">مقال</span>learncpp.com — Chapter 22</span>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="step" id="s11">
+        <div class="step-header" onclick="toggleStep('s11')">
+          <div class="step-check" onclick="toggleCheck(event,'s11')"></div>
+          <div class="step-num">11</div>
+          <div class="step-title">الهياكل — Structs</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(59,130,246,.1);color:var(--p3)">متوسط</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">Struct تجمع بيانات مختلفة الأنواع في <strong>وحدة واحدة منظمة</strong>. مثال: طالب له اسم ورقم ودرجة — كل هذا في Struct واحد.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>تعريف struct وأهميته</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>إنشاء متغيرات من نوع struct</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>الوصول للأعضاء بـ . و -></span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>مصفوفة من structs</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>شرح Struct في C++</span>
+          </div>
+          <div class="mentor-note" style="border-color:var(--p3);background:rgba(59,130,246,.04)">
+            <strong style="color:var(--p3)">💡 ملاحظة:</strong> Struct هو مدخلك لفهم Classes — كلهم مبنيون على نفس الفكرة.
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase-section">
+    <div class="phase-label">
+      <div class="phase-dot" style="background:var(--p4)"></div>
+      <div class="phase-name" style="color:var(--p4)">المرحلة الرابعة</div>
+      <span class="phase-badge" style="color:var(--p4);border-color:rgba(168,85,247,.25);background:rgba(168,85,247,.07)">البرمجة الكائنية OOP</span>
+      <div class="phase-line"></div>
+      <div class="phase-duration">4–5 أسابيع</div>
+    </div>
+    <div class="steps">
+
+      <div class="step" id="s12">
+        <div class="step-header" onclick="toggleStep('s12')">
+          <div class="step-check" onclick="toggleCheck(event,'s12')"></div>
+          <div class="step-num">12</div>
+          <div class="step-title">الكلاسات والكائنات — Classes & Objects</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(168,85,247,.1);color:var(--p4)">OOP</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">Class هو <strong>قالب</strong>، Object هو النسخة الحقيقية منه. مثل: Class "سيارة" → Object "سيارتي التويوتا الحمراء".</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>الفرق بين Class و Struct</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>الأعضاء: البيانات (Attributes) والدوال (Methods)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>public / private / protected</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>Constructor — ينفذ عند الإنشاء</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>Destructor — ينفذ عند الحذف</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>إنشاء Objects متعددة من نفس الـ Class</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>Classes C++ شرح كامل</span>
+            <span class="resource"><span class="r-type" style="background:rgba(249,115,22,.15);color:var(--p1)">مقال</span>learncpp.com — Chapter 15</span>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="step" id="s13">
+        <div class="step-header" onclick="toggleStep('s13')">
+          <div class="step-check" onclick="toggleCheck(event,'s13')"></div>
+          <div class="step-num">13</div>
+          <div class="step-title">مبادئ OOP الأربعة</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(168,85,247,.1);color:var(--p4)">OOP</span>
+            <span class="step-tag" style="background:rgba(239,68,68,.1);color:#f87171">مهم</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">الـ 4 مبادئ هي <strong>قلب البرمجة الكائنية</strong>. فهمها جيداً = تكتب كود احترافي قابل للتوسع والصيانة.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>Encapsulation — إخفاء التفاصيل الداخلية</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>Inheritance — الكلاس الابن يرث من الأب</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>Polymorphism — نفس الاسم، سلوك مختلف</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>Abstraction — إخفاء التعقيد وإظهار الضروري فقط</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>OOP C++ بالعربي</span>
+            <span class="resource"><span class="r-type" style="background:rgba(249,115,22,.15);color:var(--p1)">مقال</span>learncpp.com — Chapter 17</span>
+          </div>
+          <div class="mentor-note" style="border-color:var(--p4);background:rgba(168,85,247,.04)">
+            <strong style="color:var(--p4)">🎯 مشروع المرحلة:</strong> صمّم نظام بسيط لإدارة الطلاب — Class طالب، Class مادة، Class مدرسة. اربطهم ببعض.
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase-section">
+    <div class="phase-label">
+      <div class="phase-dot" style="background:var(--p5)"></div>
+      <div class="phase-name" style="color:var(--p5)">المرحلة الخامسة</div>
+      <span class="phase-badge" style="color:var(--p5);border-color:rgba(236,72,153,.25);background:rgba(236,72,153,.07)">الاحتراف</span>
+      <div class="phase-line"></div>
+      <div class="phase-duration">3–4 أسابيع</div>
+    </div>
+    <div class="steps">
+
+      <div class="step" id="s14">
+        <div class="step-header" onclick="toggleStep('s14')">
+          <div class="step-check" onclick="toggleCheck(event,'s14')"></div>
+          <div class="step-num">14</div>
+          <div class="step-title">مكتبة STL — الأدوات الجاهزة</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(236,72,153,.1);color:var(--p5)">متقدم</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">STL = أدوات جاهزة كتبها خبراء. <strong>لا تعيد اختراع العجلة</strong> — تعلم كيف تستخدم ما هو موجود.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>vector — مصفوفة ديناميكية قابلة للتغيير</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>map — بيانات بمفتاح وقيمة (key-value)</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>set — قائمة بدون تكرار</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>stack / queue</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>الخوارزميات: sort، find، count</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>Iterators — التنقل بين العناصر</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>STL C++ كامل</span>
+            <span class="resource"><span class="r-type" style="background:rgba(59,130,246,.15);color:var(--p3)">موقع</span>cppreference.com</span>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="step" id="s15">
+        <div class="step-header" onclick="toggleStep('s15')">
+          <div class="step-check" onclick="toggleCheck(event,'s15')"></div>
+          <div class="step-num">15</div>
+          <div class="step-title">معالجة الأخطاء والملفات</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(236,72,153,.1);color:var(--p5)">متقدم</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">البرامج الحقيقية تقرأ وتكتب ملفات وتتعامل مع أخطاء غير متوقعة. <strong>هذا ما يجعل البرنامج جاهزاً للواقع.</strong></p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>try / catch / throw — معالجة الاستثناءات</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>ofstream — كتابة الملفات</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>ifstream — قراءة الملفات</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>التحقق من وجود الملف قبل فتحه</span></div>
+          </div>
+          <div class="resources-label">مصادر مقترحة</div>
+          <div class="resources">
+            <span class="resource"><span class="r-type" style="background:rgba(255,0,0,.15);color:#f87171">YT</span>File Handling C++</span>
+            <span class="resource"><span class="r-type" style="background:rgba(249,115,22,.15);color:var(--p1)">مقال</span>learncpp.com — Chapter 23</span>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="step" id="s16">
+        <div class="step-header" onclick="toggleStep('s16')">
+          <div class="step-check" onclick="toggleCheck(event,'s16')"></div>
+          <div class="step-num">16</div>
+          <div class="step-title">🏆 المشروع النهائي — ابنِ شيئاً حقيقياً</div>
+          <div class="step-tags">
+            <span class="step-tag" style="background:rgba(236,72,153,.1);color:var(--p5)">مشروع</span>
+          </div>
+          <div class="step-expand">▾</div>
+        </div>
+        <div class="step-body"><div class="step-inner">
+          <p class="step-desc">المشروع هو الامتحان الحقيقي. <strong>اختر فكرة وابنها من الصفر</strong> — الأخطاء اللي ستواجهها ستعلمك أكثر من كل الدروس.</p>
+          <div class="subtopics">
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>🎮 لعبة نصية: خمّن الرقم، أو RPG بسيط</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>🏦 نظام إدارة بنكية بسيط</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>📚 نظام مكتبة لإدارة الكتب</span></div>
+            <div class="subtopic" onclick="toggleSub(this)"><div class="sub-check"></div><span>🎓 نظام درجات طلاب مع حفظ الملفات</span></div>
+          </div>
+          <div class="mentor-note" style="border-color:var(--p5);background:rgba(236,72,153,.04)">
+            <strong style="color:var(--p5)">🚀 بعد ما تخلص:</strong> أنت جاهز للانتقال لـ Data Structures & Algorithms، أو تطوير الألعاب بـ SFML/Unreal، أو أنظمة التشغيل. الباب مفتوح!
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section class="tips-section">
+  <div class="sec-title">نصائح أساسية</div>
+  <div class="tips-grid">
+    ${[
+      ['⏱','ساعة يومياً تكفي','الاتساق أهم من الكمية. ساعة كل يوم لمدة 4 أشهر أقوى بكثير من 8 ساعات أسبوعية.'],
+      ['✍️','اكتب الكود بيدك','لا تنسخ — حتى لو أخطأت. الخطأ نفسه يعلمك أكثر من ألف شرح.'],
+      ['🔨','ابنِ مشاريع من البداية','بعد كل مرحلة، اكتب مشروعاً صغيراً. التطبيق يثبّت النظرية.'],
+      ['🐛','الأخطاء صديقك','كل error فرصة تعلم. قبل ما تبحث عن الحل، خصص 10 دقائق تحاول لوحدك.'],
+      ['📖','learncpp.com مرجعك','أفضل مرجع مجاني لـ C++ — اقرأه جنب أي مصدر آخر.'],
+      ['🤝','لا تستحي من السؤال','كل مبرمج محترف مرّ بنفس الأسئلة. السؤال ذكاء وليس ضعف.'],
+    ].map(([i,t,d]) => `
+      <div class="tip-card">
+        <div class="tip-icon">${i}</div>
+        <div><div class="tip-title">${t}</div><div class="tip-text">${d}</div></div>
+      </div>`).join('')}
+  </div>
+</section>
+
+<!-- MISTAKES -->
+<section class="mistakes-section">
+  <div class="sec-title">أخطاء شائعة — تجنّبها</div>
+  <div class="mistakes-list">
+    ${[
+      ['🚫','حفظ الكود بدون فهم','يكتب الكود يشتغل لكن لا يعرف ليش. عند أي تعديل بسيط كل شيء ينهار.','افهم كل سطر تكتبه — اسأل ليش قبل كيف'],
+      ['🚫','القفز للمواضيع المتقدمة','يقرأ عن OOP وهو لم يتقن الدوال بعد. بناء على أساس هش.','اتبع الخارطة بالترتيب — كل خطوة تبني على السابقة'],
+      ['🚫','المشاهدة بدون تطبيق','يشاهد ساعات من الشروحات بدون كتابة سطر واحد.','لكل 10 دقائق مشاهدة، 20 دقيقة تطبيق — قاعدة ثابتة'],
+      ['🚫','التوقف عند أول عقبة','يواجه مشكلة ويقول C++ صعبة ويوقف. كل مبرمج محترف مر بهذا.','30 دقيقة بحث قبل الاستسلام — العقبات هي نقاط النمو'],
+    ].map(([x,t,d,f]) => `
+      <div class="mistake">
+        <div class="m-x">${x}</div>
+        <div>
+          <div class="m-title">${t}</div>
+          <div class="m-text">${d}</div>
+          <div class="m-fix">✅ ${f}</div>
+        </div>
+      </div>`).join('')}
+  </div>
+</section>
+
+<footer>
+  مرجع مسار تعلم C++ — تتبع تقدمك خطوة بخطوة<br>
+  <span style="font-size:11px;opacity:.5;display:block;margin-top:6px">تقدمك محفوظ في المتصفح — يمكنك الرجوع له في أي وقت</span>
+</footer>
+
+<script>
+const STORAGE_KEY = 'cpp_roadmap_v1';
+
+function saveState() {
+  const state = {};
+  document.querySelectorAll('.step').forEach(s => {
+    state[s.id] = {
+      completed: s.classList.contains('completed'),
+      open: s.classList.contains('open'),
+      subs: []
+    };
+    s.querySelectorAll('.subtopic').forEach((sub, i) => {
+      state[s.id].subs[i] = sub.classList.contains('checked');
+    });
+  });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function loadState() {
+  try {
+    const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    Object.entries(state).forEach(([id, data]) => {
+      const step = document.getElementById(id);
+      if (!step) return;
+      if (data.completed) {
+        step.classList.add('completed');
+        step.querySelector('.step-check').textContent = '✓';
+      }
+      if (data.open) {
+        step.classList.add('open');
+        step.querySelector('.step-body').style.maxHeight = '1000px';
+      }
+      step.querySelectorAll('.subtopic').forEach((sub, i) => {
+        if (data.subs && data.subs[i]) {
+          sub.classList.add('checked');
+          sub.querySelector('.sub-check').textContent = '✓';
+        }
+      });
+    });
+    updateProgress();
+  } catch(e) {}
+}
+
+function toggleStep(id) {
+  const step = document.getElementById(id);
+  step.classList.toggle('open');
+  saveState();
+}
+
+function toggleCheck(e, id) {
+  e.stopPropagation();
+  const step = document.getElementById(id);
+  const check = step.querySelector('.step-check');
+  step.classList.toggle('completed');
+  check.textContent = step.classList.contains('completed') ? '✓' : '';
+  updateProgress();
+  saveState();
+}
+
+function toggleSub(el) {
+  el.classList.toggle('checked');
+  const chk = el.querySelector('.sub-check');
+  chk.textContent = el.classList.contains('checked') ? '✓' : '';
+  updateProgress();
+  saveState();
+}
+
+function updateProgress() {
+  const allSubs = document.querySelectorAll('.subtopic');
+  const doneSubs = document.querySelectorAll('.subtopic.checked');
+  const pct = allSubs.length ? Math.round(doneSubs.length / allSubs.length * 100) : 0;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+}
+
+loadState();
+</script>
+</body>
+</html>
